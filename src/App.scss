@@ -1,0 +1,176 @@
+$mainTransitionDuration: 0.75s;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: min(calc(100vh * 16 / 1080), calc(100vw * 16 / 1920));
+}
+
+html,
+body,
+#root {
+  height: 100%
+}
+
+.App {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+.backdrop {
+  height: 100%;
+  cursor: pointer;
+  transition: $mainTransitionDuration;
+  background: #000;
+  transform: translateX(-95%);
+}
+
+.menu {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  padding: 0 5rem 15rem 1rem;
+  gap: 1.5rem;
+  z-index: 2;
+  cursor: pointer;
+
+  & * {
+    transition: $mainTransitionDuration;
+  }
+
+  &:hover + .backdrop {
+    transform: translateX(0);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+  }
+
+  &:hover {
+    .menuItemName,
+    .menuFooter,
+    .userProfile {
+      opacity: 1;
+    }
+  }
+}
+
+.menuIconItem {
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  gap: 2rem;
+  padding: 1rem;
+
+  &:hover {
+    background-color: rgb(59, 72, 109);
+    border-radius: 1rem;
+
+    .menuItemName {
+      font-weight: 500;
+    }
+  }
+}
+
+.menuItemName {
+  font-size: 1.5rem;
+  opacity: 0;
+  font-weight: 300;
+  font-family: 'Kanit', sans-serif;
+}
+
+.menuFooter {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 2rem;
+  padding: 0 0 0 1.5rem;
+  gap: 1rem;
+  color: #a9a9a9;
+  font-size: 1.4rem;
+  font-family: 'Kanit', sans-serif;
+  opacity: 0;
+
+  p:hover {
+    color: #fff;
+  }
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+
+  p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+
+/* .featured {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url("assets/images/FeaturedCoverImage.png");
+    background-repeat: no-repeat;
+} */
+
+
+/* .menu:hover p {
+    transition: width 5s;
+}
+
+.menuItemName,
+.userProfile p {
+    color: white;
+    font-size: 24px;
+}
+
+
+
+.menuFooter {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.menuFooter p {
+    color: #b4b4b4;
+    font-size: 24px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.menuItems {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 35px;
+}
+
+.menuItems:hover {
+    background-color: rgb(59, 72, 109);
+    border-radius: 8px;
+}
+
+.menuItems:hover p {
+    font-weight: bold;
+}
+
+ */
