@@ -1,5 +1,14 @@
 $mainTransitionDuration: 0.75s;
 
+@mixin coverImgVideoSize {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  width: calc(100vw - 40%);
+  height: calc(100vh - 30%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,18 +22,21 @@ html {
 html,
 body,
 #root {
-  height: 100%
+  height: 100%;
 }
 
 .App {
   position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: red;
+  display: flex;
 }
 
 .backdrop {
-  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  height: 100vh;
+  width: 100vw;
   cursor: pointer;
   transition: $mainTransitionDuration;
   background: #000;
@@ -39,9 +51,9 @@ body,
   top: 0;
   left: 0;
   height: 100vh;
-  padding: 0 5rem 15rem 1rem;
+  padding: 0 0rem 15rem 1rem;
   gap: 1.5rem;
-  z-index: 2;
+  z-index: 5;
   cursor: pointer;
 
   & * {
@@ -50,7 +62,12 @@ body,
 
   &:hover + .backdrop {
     transform: translateX(0);
-    background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0.6) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 
   &:hover {
@@ -83,7 +100,7 @@ body,
   font-size: 1.5rem;
   opacity: 0;
   font-weight: 300;
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 
 .menuFooter {
@@ -95,7 +112,7 @@ body,
   gap: 1rem;
   color: #a9a9a9;
   font-size: 1.4rem;
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
   opacity: 0;
 
   p:hover {
@@ -121,56 +138,174 @@ body,
   }
 }
 
+.home {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
 
-/* .featured {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-image: url("assets/images/FeaturedCoverImage.png");
-    background-repeat: no-repeat;
-} */
+  .featuredCover {
+    width: 100%;
+    height: 100%;
 
+    img {
+      @include coverImgVideoSize;
+      z-index: 2;
+      object-fit: cover;
+      animation: hide 2s 1s forwards;
+    }
 
-/* .menu:hover p {
-    transition: width 5s;
+    video {
+      @include coverImgVideoSize;
+    }
+  }
 }
 
-.menuItemName,
-.userProfile p {
-    color: white;
-    font-size: 24px;
+.trendingNow{
+  font-size: 2rem;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 1rem;
+  color: #f7f7f7;
+  letter-spacing: 0.3rem;
 }
 
+.scroller {
+  position: absolute;
+  z-index: 3;
+  left: 12rem;
+  bottom: 2rem;
+  width: calc(100% - 12rem);
+}
 
+.scrollerItem {
+  display: inline-flex;
+  margin: 0 0.5rem;
 
-.menuFooter {
-    position: absolute;
-    bottom: 0;
+  img {
+    width: 13rem;
+    height: 18rem;
+    cursor: pointer;
+  }
+}
+
+.scroll-container,
+.container {
+  display: flex;
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.featuredTitle {
+  position: absolute;
+  max-width: 40%;
+  height: 100%;
+  display: flex;
+  z-index: 3;
+  padding-top: 10rem;
+
+  flex-direction: column;
+  left: 12rem;
+
+  .infoContainer {
+    display: flex;
+    gap: 12px;
+  }
+
+  .gapContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
+    gap: 1rem;
+  }
 
-.menuFooter p {
-    color: #b4b4b4;
-    font-size: 24px;
-    font-family: 'Kanit', sans-serif;
-}
+  .category {
+    font-size: 1.3rem;
+    font-weight: 900;
+    font-family: "Kanit", sans-serif;
+    color: #858688;
+    letter-spacing: 0.3rem;
+  }
 
-.menuItems {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    gap: 35px;
-}
+  .title {
+    font-size: 6rem;
+    text-wrap: wrap;
+    font-family: "Russo One", sans-serif;
+    color: #f7f7f7;
+    letter-spacing: 0.3rem;
+  }
 
-.menuItems:hover {
-    background-color: rgb(59, 72, 109);
-    border-radius: 8px;
-}
+  .releaseYear,
+  .mpaRating,
+  .duration {
+    font-size: 1.3rem;
+    font-family: "Kanit", sans-serif;
+    color: #d3d2d2;
+    letter-spacing: 0.3rem;
+  }
 
-.menuItems:hover p {
-    font-weight: bold;
-}
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
 
- */
+  ::-webkit-scrollbar-track {
+    background: #d3d1d1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .description {
+    direction: rtl;
+    text-align: end;
+    padding-left: 1rem;
+    width: 55rem;
+    word-wrap: break-word;
+    max-height: 14rem;
+    overflow-y: auto;
+    font-size: 1.4rem;
+    font-family: "Roboto", sans-serif;
+    color: #dbdbdb;
+    letter-spacing: 0.1rem;
+  }
+
+  .btnsContainer {
+    margin-top: 2rem;
+  }
+
+  .playBtn,
+  .moreInfoBtn {
+    border: none;
+    cursor: pointer;
+    font-family: "Kanit", sans-serif;
+    font-size: 1.5rem;
+    width: 14rem;
+    height: 4rem;
+    border-radius: 2.5rem;
+  }
+
+  .playBtn {
+    margin-right: 1.5rem;
+  }
+
+  .moreInfoBtn {
+    color: #fff;
+    background-color: #0040c0;
+  }
+
+  .playBtn:before {
+    content: "►";
+    margin-right: 0.5rem;
+  }
+}

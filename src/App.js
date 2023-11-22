@@ -1,4 +1,4 @@
-import { Backdrop,Menu } from "./components";
+import { Backdrop, Menu, Home } from "./components";
 
 import './App.scss';
 
@@ -7,6 +7,7 @@ function App() {
         <div className="App">
             <Menu />
             <Backdrop />
+            <Home />
         </div>
     );
 }

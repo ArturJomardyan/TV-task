@@ -1,4 +1,4 @@
-import {profilePic} from "../../assets/images/index"
+import profilePic from "../../assets/images/profilePic.png"
 
 export const UserProfile = () =>
         <div className="userProfile">
